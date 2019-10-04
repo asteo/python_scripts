@@ -45,9 +45,10 @@ print('  ')
 print('  ')
 print('############### SET NEW VALUES ################################')
  
-baudrate = 'AT+B115200'
-mode     = 'AT+FU3'
-channel  = 'AT+C025'
+baudrate    = 'AT+B9600'
+mode        = 'AT+FU3'
+channel     = 'AT+C001'
+power_mode  = 'AT+P8'
 #---------------------------------------------------------------     # write a string
 print(baudrate)
 ser.write(str.encode(baudrate))     # write a string
@@ -61,5 +62,10 @@ print(s)
  
 print(channel)
 ser.write(str.encode(channel))     # write a string
+s = ser.readline()
+print(s)
+
+print(power_mode)
+ser.write(str.encode(power_mode))     # write a string
 s = ser.readline()
 print(s)
