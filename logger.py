@@ -16,8 +16,9 @@ t2_regexp_list = ["ALS","| mode |"]
 t2_regexp_line = 'isp_vs_metrics'
 
 t1_serial_interface = '/dev/ttyUSB0'
-t1_full_logs_path   = '/home/asteo/Documents/logger_data/logs/t1_log.txt'
-t1_regexp_logs_path =  '/home/asteo/Documents/logger_data/logs/t1_regexp_log.txt'
+t1_full_logs_path   = 'logger_data/t1_log.txt'
+t1_regexp_logs_path =  'logger_data/t1_regexp_log.txt'
+# if os.uname()[4] == 'armv5tel':
 
 t2_serial_interface = '/dev/ttyUSB1'
 t2_full_logs_path   = '/home/asteo/Documents/logger_data/logs/t2_log.txt'
@@ -134,20 +135,20 @@ class myLoggerThread (threading.Thread):
 
 threadLock = threading.Lock()
 
-t1_logger = myLoggerThread(1, "T1-Logger", t1_full_logs_path, t1_regexp_logs_path, t1_regexp_list, t1_regexp_line,t1_serial_interface, 921600)
-t2_logger = myLoggerThread(2, "T2-Logger", t2_full_logs_path, t2_regexp_logs_path, t2_regexp_list, t2_regexp_line,t2_serial_interface, 115200, True)
+t1_logger = myLoggerThread(1, "T1-Logger", t1_full_logs_path, t1_regexp_logs_path, t1_regexp_list, t1_regexp_line,t1_serial_interface, 9600)
+# t2_logger = myLoggerThread(2, "T2-Logger", t2_full_logs_path, t2_regexp_logs_path, t2_regexp_list, t2_regexp_line,t2_serial_interface, 115200, True)
 
 # Start new Threads
 t1_logger.start()
-t2_logger.start()
+# t2_logger.start()
 
 def receiveSignal(signum, stack):
     print ('Received: {} {}'.format(signum, stack))
     if signum == signal.SIGINT:
         if t1_logger != None:
             t1_logger.stop()
-        if t2_logger != None:
-            t2_logger.stop()
+        # if t2_logger != None:
+        #     t2_logger.stop()
         exit(0)
 
 signal.signal(signal.SIGUSR1, receiveSignal)
@@ -155,6 +156,6 @@ signal.signal(signal.SIGINT, receiveSignal)
 
 if t1_logger != None:
     t1_logger.join()
-if t2_logger != None:
-    t2_logger.join()
+# if t2_logger != None:
+#     t2_logger.join()
 print ("Exiting Main Thread")
