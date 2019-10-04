@@ -15,10 +15,15 @@ t1_regexp_line = 'BRD'
 t2_regexp_list = ["ALS","| mode |"]
 t2_regexp_line = 'isp_vs_metrics'
 
-t1_serial_interface = '/dev/ttyUSB0'
+if os.uname()[4] == 'armv5tel':
+    t1_serial_interface = '/dev/ttyUSB3'
+else:
+    t1_serial_interface = '/dev/ttyUSB0'
+
+
 t1_full_logs_path   = 'logger_data/t1_log.txt'
 t1_regexp_logs_path =  'logger_data/t1_regexp_log.txt'
-# if os.uname()[4] == 'armv5tel':
+7
 
 t2_serial_interface = '/dev/ttyUSB1'
 t2_full_logs_path   = '/home/asteo/Documents/logger_data/logs/t2_log.txt'
