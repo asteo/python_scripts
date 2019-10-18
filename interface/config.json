@@ -1,0 +1,10 @@
+{
+"connectionType": "fill below 'socket' or 'serial'",
+"connectionType": "socket",
+"PORT": "/dev/ttyUSB0",
+"IP_TYPE": "TCP",
+"IP_PORT": 7777, 
+"baudrate": 115200,
+"buffer": 1024,
+"ADDRESS": "localhost"
+}
